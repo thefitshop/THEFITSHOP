@@ -26,8 +26,8 @@ const ADDED_PRODS_KEY       = 'fitshop_added_products';
 const DELETED_PRODS_KEY     = 'fitshop_deleted_products';
 const TRACKING_KEY          = 'fitshop_order_tracking';
 const ROYAL_MAIL_KEY        = 'fitshop_order_royal_mail';
-const RM_FUNCTION_URL       = 'https://us-central1-tantan-1ca3f.cloudfunctions.net/sendToRoyalMail';
-const RM_LABEL_URL          = 'https://us-central1-tantan-1ca3f.cloudfunctions.net/generateLabel';
+const RM_FUNCTION_URL       = 'YOUR_ROYAL_MAIL_FUNCTION_URL';
+const RM_LABEL_URL          = 'YOUR_ROYAL_MAIL_LABEL_URL';
 const STATUS_OPTIONS = [
   { value: 'pending',    label: '🕐 Pending'    },
   { value: 'processing', label: '⚙️ Processing' },

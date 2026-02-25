@@ -350,9 +350,9 @@ function initBasket() {
 // ══════════════════════════════════════════════
 //  PAGE: CHECKOUT  (Stripe Payment Element via Cloud Function)
 // ══════════════════════════════════════════════
-var STRIPE_FUNCTION_URL = 'https://us-central1-tantan-1ca3f.cloudfunctions.net/createPaymentIntent';
-var ROYAL_MAIL_FUNCTION_URL = 'https://us-central1-tantan-1ca3f.cloudfunctions.net/sendToRoyalMail';
-var STRIPE_PK = 'pk_live_51T3yLx1wBvlSVCQamRnHKpTy8iclKxM017wGgMlhg2J8pz7YiteysR38zmIUpYkQMVDey1nymeGyvBR8T1QIkA0t00RdQihsTL';
+var STRIPE_FUNCTION_URL = 'YOUR_STRIPE_FUNCTION_URL';
+var ROYAL_MAIL_FUNCTION_URL = 'YOUR_ROYAL_MAIL_FUNCTION_URL';
+var STRIPE_PK = 'YOUR_STRIPE_PUBLISHABLE_KEY';
 
 function getSelectedDelivery() {
   var sel = document.querySelector('input[name="delivery-type"]:checked');
