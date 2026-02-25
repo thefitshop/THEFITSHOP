@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Stock Section
+   FITLAB — Stock Section
    Edit ONLY this file for stock changes.
    ============================================ */
 

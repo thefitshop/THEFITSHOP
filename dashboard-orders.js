@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Orders Section
+   FITLAB — Orders Section
    Edit ONLY this file for orders changes.
    ============================================ */
 

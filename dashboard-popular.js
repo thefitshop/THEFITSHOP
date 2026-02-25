@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Popular Products Section
+   FITLAB — Popular Products Section
    Edit ONLY this file for popular products
    changes.
    ============================================ */

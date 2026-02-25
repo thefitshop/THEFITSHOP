@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Products Section
+   FITLAB — Products Section
    Edit ONLY this file for product management,
    category renaming, and add-product changes.
    ============================================ */

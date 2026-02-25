@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — JavaScript
+   FITLAB — JavaScript
    Shopping basket + page logic
    ============================================ */
 
@@ -92,10 +92,10 @@ const CAT_ICONS = {
 // ── Apply dashboard product overrides, deletions, renames & added products ──
 (function () {
   try {
-    const ov       = JSON.parse(localStorage.getItem('fitshop_product_overrides')) || {};
-    const deleted  = JSON.parse(localStorage.getItem('fitshop_deleted_products'))  || [];
-    const catNames = JSON.parse(localStorage.getItem('fitshop_cat_names'))         || {};
-    const added    = JSON.parse(localStorage.getItem('fitshop_added_products'))    || [];
+    const ov       = JSON.parse(localStorage.getItem('fitlab_product_overrides')) || {};
+    const deleted  = JSON.parse(localStorage.getItem('fitlab_deleted_products'))  || [];
+    const catNames = JSON.parse(localStorage.getItem('fitlab_cat_names'))         || {};
+    const added    = JSON.parse(localStorage.getItem('fitlab_added_products'))    || [];
 
     // 1. Remove deleted products (reverse splice keeps indices stable)
     for (var i = PRODUCTS.length - 1; i >= 0; i--) {
@@ -135,12 +135,12 @@ const CAT_ICONS = {
       }
     });
   } catch (e) {
-    console.error('[FitShop] Failed to apply dashboard overrides — products shown in default state:', e);
+    console.error('[FitLab] Failed to apply dashboard overrides — products shown in default state:', e);
   }
 }());
 
 // ── Basket (localStorage) ───────────────────
-const KEY = 'fitshop_basket';
+const KEY = 'fitlab_basket';
 
 function getBasket()  { return JSON.parse(localStorage.getItem(KEY)) || []; }
 function saveBasket(b){ localStorage.setItem(KEY, JSON.stringify(b)); refreshBadge(); }
@@ -202,7 +202,7 @@ function initNav() {
 
 // ── Shared: product card HTML ─────────────────
 function productCardHTML(p, btnLabel = '+ Add to Basket') {
-  const stock   = JSON.parse(localStorage.getItem('fitshop_stock')) || {};
+  const stock   = JSON.parse(localStorage.getItem('fitlab_stock')) || {};
   const qty     = stock[p.id] !== undefined ? stock[p.id] : 50;
   const oos     = qty <= 0;
   const img     = PRODUCT_IMGS[p.id];
@@ -232,7 +232,7 @@ function attachAddHandlers(container, btnLabel) {
     const btn = e.target.closest('.add-btn');
     if (!btn) return;
     const id    = +btn.dataset.id;
-    const stock = JSON.parse(localStorage.getItem('fitshop_stock')) || {};
+    const stock = JSON.parse(localStorage.getItem('fitlab_stock')) || {};
     const qty   = stock[id] !== undefined ? stock[id] : 50;
     if (qty <= 0) { showToast('Sorry, this product is out of stock'); return; }
     addToBasket(id);
@@ -409,18 +409,18 @@ function completeOrder(pending, paymentIntent) {
     }
   }
 
-  var orders = JSON.parse(localStorage.getItem('fitshop_orders')) || [];
+  var orders = JSON.parse(localStorage.getItem('fitlab_orders')) || [];
   orders.push(newOrder);
-  localStorage.setItem('fitshop_orders', JSON.stringify(orders));
+  localStorage.setItem('fitlab_orders', JSON.stringify(orders));
   if (typeof saveOrderToCloud === 'function') saveOrderToCloud(newOrder);
 
   // Reduce stock
-  var stock = JSON.parse(localStorage.getItem('fitshop_stock')) || {};
+  var stock = JSON.parse(localStorage.getItem('fitlab_stock')) || {};
   pending.basket.forEach(function (item) {
     var cur = stock[item.id] !== undefined ? stock[item.id] : 50;
     stock[item.id] = Math.max(0, cur - item.qty);
   });
-  localStorage.setItem('fitshop_stock', JSON.stringify(stock));
+  localStorage.setItem('fitlab_stock', JSON.stringify(stock));
   if (typeof saveStockToCloud === 'function') saveStockToCloud(stock);
 
   // Populate confirmation page
@@ -468,7 +468,7 @@ function completeOrder(pending, paymentIntent) {
     }).catch(function (e) { console.warn('[Royal Mail] Auto-submit failed:', e.message); });
   } catch (e) { console.warn('[Royal Mail] Auto-submit error:', e.message); }
 
-  localStorage.removeItem('fitshop_pending_order');
+  localStorage.removeItem('fitlab_pending_order');
   clearBasket();
   if (wrapper) wrapper.style.display = 'none';
   if (success) success.classList.add('show');
@@ -494,7 +494,7 @@ function handlePaymentRedirectReturn() {
   }
 
   // Retrieve pending order saved before redirect
-  var pending = JSON.parse(localStorage.getItem('fitshop_pending_order'));
+  var pending = JSON.parse(localStorage.getItem('fitlab_pending_order'));
   if (!pending) {
     showToast('Order data not found. Please contact us if you were charged.');
     return true;
@@ -684,7 +684,7 @@ function initCheckout() {
             country:  countryEl  ? countryEl.value.trim()  : ''
           }
         };
-        localStorage.setItem('fitshop_pending_order', JSON.stringify(pendingOrder));
+        localStorage.setItem('fitlab_pending_order', JSON.stringify(pendingOrder));
 
         // Step 3: Confirm payment
         var returnUrl = window.location.href.split('?')[0];
@@ -711,7 +711,7 @@ function initCheckout() {
         });
 
         if (error) {
-          localStorage.removeItem('fitshop_pending_order');
+          localStorage.removeItem('fitlab_pending_order');
           if (paymentErrs) paymentErrs.textContent = error.message;
           showToast(error.message || 'Payment failed. Please try again.');
           placeBtn.disabled = false;
@@ -723,7 +723,7 @@ function initCheckout() {
         if (paymentIntent && (paymentIntent.status === 'succeeded' || paymentIntent.status === 'processing')) {
           completeOrder(pendingOrder, paymentIntent);
         } else {
-          localStorage.removeItem('fitshop_pending_order');
+          localStorage.removeItem('fitlab_pending_order');
           showToast('Payment was not completed. Please try again.');
           placeBtn.disabled = false;
           placeBtn.textContent = 'Pay & Place Order \u2192';
@@ -731,7 +731,7 @@ function initCheckout() {
 
       } catch (err) {
         console.error('[Checkout] Payment error:', err);
-        localStorage.removeItem('fitshop_pending_order');
+        localStorage.removeItem('fitlab_pending_order');
         showToast(err.message || 'Payment error. Please try again.');
         placeBtn.disabled = false;
         placeBtn.textContent = 'Pay & Place Order \u2192';
@@ -812,7 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var hasSyncFn = typeof syncProductsFromCloud === 'function';
   if (!hasSyncFn) {
-    console.warn('[FitShop] syncProductsFromCloud not available — firebase-config.js may not be loaded. Check script order and CSP.');
+    console.warn('[FitLab] syncProductsFromCloud not available — firebase-config.js may not be loaded. Check script order and CSP.');
   }
 
   // Fetch products from Firestore with 5-second timeout
@@ -821,7 +821,7 @@ document.addEventListener('DOMContentLoaded', () => {
         syncProductsFromCloud(),
         new Promise(function (resolve) {
           setTimeout(function () {
-            console.warn('[FitShop] Firestore fetch timed out after 5 seconds — showing fallback names');
+            console.warn('[FitLab] Firestore fetch timed out after 5 seconds — showing fallback names');
             resolve({});
           }, 5000);
         })
@@ -831,9 +831,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ready.then(function (cloudProducts) {
     var count = cloudProducts ? Object.keys(cloudProducts).length : 0;
     if (count === 0) {
-      console.warn('[FitShop] No products loaded from Firestore — displaying hardcoded names');
+      console.warn('[FitLab] No products loaded from Firestore — displaying hardcoded names');
     } else {
-      console.log('[FitShop] Applying', count, 'product names from Firestore');
+      console.log('[FitLab] Applying', count, 'product names from Firestore');
     }
     applyFirestoreProducts(cloudProducts);
     initFeatured();

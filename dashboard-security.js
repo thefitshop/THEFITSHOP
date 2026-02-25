@@ -1,6 +1,6 @@
 /* ── Dashboard Security Tab — real-time polling ───────────────────── */
 
-var BLOCKED_BOTS_KEY  = 'fitshop_blocked_bots';
+var BLOCKED_BOTS_KEY  = 'fitlab_blocked_bots';
 var _secPollTimer     = null;
 var _secLastCount     = -1;
 var _secPollInterval  = 3000;
@@ -101,7 +101,7 @@ function renderSecurity() {
     }
 
   } catch (e) {
-    console.error('[FitShop Dashboard] Security section failed:', e);
+    console.error('[FitLab Dashboard] Security section failed:', e);
   }
 }
 

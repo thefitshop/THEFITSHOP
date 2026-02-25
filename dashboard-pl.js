@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Profit & Loss Section
+   FITLAB — Profit & Loss Section
    Edit ONLY this file for P&L changes.
    ============================================ */
 

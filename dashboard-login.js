@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Login & Init
+   FITLAB — Login & Init
    Handles password login, session management,
    tab switching, and booting all sections.
    ============================================ */
@@ -71,7 +71,7 @@ async function initDashboard() {
       if (typeof syncTrackingFromCloud === 'function') await syncTrackingFromCloud();
       if (typeof syncRoyalMailFromCloud === 'function') await syncRoyalMailFromCloud();
     } catch (e) {
-      console.error('[FitShop Dashboard] Cloud sync failed, using local data:', e);
+      console.error('[FitLab Dashboard] Cloud sync failed, using local data:', e);
     }
   }
 
@@ -91,7 +91,7 @@ async function initDashboard() {
     try {
       section.fn();
     } catch (e) {
-      console.error('[FitShop Dashboard] ' + section.name + ' failed to load:', e);
+      console.error('[FitLab Dashboard] ' + section.name + ' failed to load:', e);
     }
   });
 

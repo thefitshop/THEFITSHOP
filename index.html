@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';" />
-  <title>THE FIT SHOP — Premium Performance Products</title>
+  <title>FITLAB — Premium Performance Products</title>
   <meta name="description" content="Premium performance products for serious athletes. Build muscle, burn fat, perform better." />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
@@ -36,7 +36,7 @@
       if (isBlocked) {
         // Log to localStorage so the dashboard Security tab can display it
         try {
-          var logs = JSON.parse(localStorage.getItem('fitshop_blocked_bots') || '[]');
+          var logs = JSON.parse(localStorage.getItem('fitlab_blocked_bots') || '[]');
           logs.unshift({
             ua:     ua,
             page:   'index',
@@ -44,7 +44,7 @@
             reason: 'user-agent match'
           });
           if (logs.length > 200) logs.length = 200;
-          localStorage.setItem('fitshop_blocked_bots', JSON.stringify(logs));
+          localStorage.setItem('fitlab_blocked_bots', JSON.stringify(logs));
         } catch (e) {}
 
         window.location.replace('blocked.html');
@@ -58,13 +58,13 @@
         var now      = Date.now();
         var window_ms = 60000; // 1 minute
         var maxHits  = 30;
-        var visits   = JSON.parse(localStorage.getItem('fitshop_rl_visits') || '[]');
+        var visits   = JSON.parse(localStorage.getItem('fitlab_rl_visits') || '[]');
 
         // Expire old entries outside the time window
         visits = visits.filter(function (t) { return now - t < window_ms; });
 
         if (visits.length >= maxHits) {
-          var logs = JSON.parse(localStorage.getItem('fitshop_blocked_bots') || '[]');
+          var logs = JSON.parse(localStorage.getItem('fitlab_blocked_bots') || '[]');
           logs.unshift({
             ua:     ua,
             page:   'index',
@@ -72,13 +72,13 @@
             reason: 'rate-limit (' + visits.length + ' hits/60s)'
           });
           if (logs.length > 200) logs.length = 200;
-          localStorage.setItem('fitshop_blocked_bots', JSON.stringify(logs));
+          localStorage.setItem('fitlab_blocked_bots', JSON.stringify(logs));
           window.location.replace('blocked.html');
           return;
         }
 
         visits.push(now);
-        localStorage.setItem('fitshop_rl_visits', JSON.stringify(visits));
+        localStorage.setItem('fitlab_rl_visits', JSON.stringify(visits));
       } catch (e) {}
     }());
   </script>
@@ -121,7 +121,7 @@
     </div>
 
     <div class="landing-logo anim-fade" style="animation-delay:0.12s">
-      THE<em>FIT</em>SHOP
+      FIT<em>LAB</em>
     </div>
 
     <p class="landing-tagline anim-fade" style="animation-delay:0.24s">
@@ -192,7 +192,7 @@
   </a>
 
   <!-- ── WhatsApp floating chat button ── -->
-  <a href="https://wa.me/447348130502?text=Hi%20FitShop!%20I%20would%20like%20to%20know%20more%20about%20your%20products"
+  <a href="https://wa.me/447348130502?text=Hi%20FitLab!%20I%20would%20like%20to%20know%20more%20about%20your%20products"
      class="wa-btn" target="_blank" rel="noopener noreferrer"
      aria-label="Chat with us on WhatsApp">
     <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" aria-hidden="true">

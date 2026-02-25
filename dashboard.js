@@ -1,5 +1,5 @@
 /* ============================================
-   THE FIT SHOP — Dashboard Core
+   FITLAB — Dashboard Core
    Shared constants and helpers used by all
    section files. Only edit this file to add
    a new shared utility — never put section
@@ -15,17 +15,17 @@ async function hashPassword(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
-const SESSION_KEY           = 'fitshop_dash_session';
-const ORDERS_KEY            = 'fitshop_orders';
-const STOCK_KEY             = 'fitshop_stock';
-const COSTS_KEY             = 'fitshop_costs';
-const STATUS_KEY            = 'fitshop_order_statuses';
-const PRODUCT_OVERRIDES_KEY = 'fitshop_product_overrides';
-const CAT_NAMES_KEY         = 'fitshop_cat_names';
-const ADDED_PRODS_KEY       = 'fitshop_added_products';
-const DELETED_PRODS_KEY     = 'fitshop_deleted_products';
-const TRACKING_KEY          = 'fitshop_order_tracking';
-const ROYAL_MAIL_KEY        = 'fitshop_order_royal_mail';
+const SESSION_KEY           = 'fitlab_dash_session';
+const ORDERS_KEY            = 'fitlab_orders';
+const STOCK_KEY             = 'fitlab_stock';
+const COSTS_KEY             = 'fitlab_costs';
+const STATUS_KEY            = 'fitlab_order_statuses';
+const PRODUCT_OVERRIDES_KEY = 'fitlab_product_overrides';
+const CAT_NAMES_KEY         = 'fitlab_cat_names';
+const ADDED_PRODS_KEY       = 'fitlab_added_products';
+const DELETED_PRODS_KEY     = 'fitlab_deleted_products';
+const TRACKING_KEY          = 'fitlab_order_tracking';
+const ROYAL_MAIL_KEY        = 'fitlab_order_royal_mail';
 const RM_FUNCTION_URL       = 'YOUR_ROYAL_MAIL_FUNCTION_URL';
 const RM_LABEL_URL          = 'YOUR_ROYAL_MAIL_LABEL_URL';
 const STATUS_OPTIONS = [
